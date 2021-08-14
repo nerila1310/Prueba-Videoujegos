@@ -1,0 +1,46 @@
+<header class="header">
+    <div class="contenedor">
+        <div class="barra">
+            
+            <a routerLink="/" class="logo">
+                <h2> VideoJuegos </h2>
+            </a>
+
+            <nav class="navegacion">
+                
+                <div class="entrada-link" routerLinkActive="actived" [routerLinkActiveOptions]="{exact:true}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list" width="25" height="25" viewBox="0 0 24 24" stroke-width="2" stroke="#e2e288" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <line x1="9" y1="6" x2="20" y2="6" />
+                        <line x1="9" y1="12" x2="20" y2="12" />
+                        <line x1="9" y1="18" x2="20" y2="18" />
+                        <line x1="5" y1="6" x2="5" y2="6.01" />
+                        <line x1="5" y1="12" x2="5" y2="12.01" />
+                        <line x1="5" y1="18" x2="5" y2="18.01" />
+                      </svg>
+                    <a routerLink="/">Listado</a>
+                </div>
+
+                <div class="entrada-link" routerLinkActive="actived" [routerLinkActiveOptions]="{exact:true}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="25" height="25" viewBox="0 0 24 24" stroke-width="2" stroke="#e2e288" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <circle cx="12" cy="12" r="9" />
+                        <line x1="9" y1="12" x2="15" y2="12" />
+                        <line x1="12" y1="9" x2="12" y2="15" />
+                      </svg>
+                    <a routerLink="/agregar">Agregar</a>
+                </div>
+                
+                <div class="entrada-link" routerLinkActive="actived" [routerLinkActiveOptions]="{exact:true}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="25" height="25" viewBox="0 0 24 24" stroke-width="2" stroke="#e2e288" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <circle cx="10" cy="10" r="7" />
+                        <line x1="21" y1="21" x2="15" y2="15" />
+                    </svg>
+                    <a routerLink="/buscar" >Buscar</a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+</header>

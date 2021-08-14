@@ -1,0 +1,14 @@
+.menu-home{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.menu{
+flex: 0 0 25%;
+}
+
+.home{
+    flex: 0 0 75%;
+}
