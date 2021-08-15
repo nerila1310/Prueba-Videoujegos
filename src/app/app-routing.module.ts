@@ -10,6 +10,7 @@ const routes: Routes = [
   {path:'listar', component:ListadoComponent},
   {path:'buscar', component:BuscarComponent},
   {path:'agregar', component:AgregarComponent},
+  {path:'editar/:id', component:AgregarComponent},
   { path: 'detalle/:id', component: DetalleComponent}
 ];
 

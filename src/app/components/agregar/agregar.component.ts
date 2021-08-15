@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface Common {
   _id:String;
@@ -30,17 +30,24 @@ export class AgregarComponent implements OnInit {
   public desarrolladores: any[] = new Array<any>();
   public games!:FormGroup;
   public submit:boolean = false;
-  @Input() idGame!:String;
+  public idGame!:any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: Router 
+    private route: Router,
+    private _route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    
     this.addForm();
     this.getCatalogos();
     this.getDevelopers();
+
+    this._route.params.subscribe(params=>{
+      this.idGame = params.id;
+      this.getVideoGame(this.idGame);
+    })
   }
 
   public addForm():void{
@@ -53,6 +60,30 @@ export class AgregarComponent implements OnInit {
     });
   }
 
+  getVideoGame = async (id:string) =>{
+
+    var url = `https://api-videogames.herokuapp.com/api/videogames/${id}`;
+    var auth ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmVyaWxhIiwiaWF0IjoxNjI4ODc4MTgxfQ.ZRz8E21Ek4-Ny0hXBx7Sq401ZZ8yuSAeL0D7wqAUJyA';
+  
+    const respuesta = await fetch(url, {
+                          method: 'GET',
+                          headers:{'Authorization':auth, 'Content-Type': 'application/json' }
+                      }
+                    );
+    const resultado = await respuesta.json();
+    
+    this.games.patchValue({
+      developer:resultado.videogame.developer,
+      name:resultado.videogame.name,
+      description: resultado.videogame.description,
+      year:resultado.videogame.year,
+      console:resultado.videogame.console[0]
+    });
+  }
+
+  compare(v1:any, v2:any){
+    return v1._id === v2._id;
+  }
 
   getCatalogos = async () =>{
 
@@ -114,11 +145,11 @@ export class AgregarComponent implements OnInit {
 
 
   onSubmit(){
-    //setProjects();
     this.submit = true;
     let forma = JSON.parse(JSON.stringify(this.games.value));
     forma.console = [forma.console];
     this.guardarProjects(forma);
+    
   }
 
 }

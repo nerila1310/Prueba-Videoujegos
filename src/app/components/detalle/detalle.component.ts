@@ -10,13 +10,14 @@ export class DetalleComponent implements OnInit {
 
   public videojuego:any = {};
   public console:any[] = [];
-
-  constructor(private _router: Router,private _route: ActivatedRoute) { }
+  public idGame:any;
+  
+  constructor(private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this._route.params.subscribe(params=>{
-      let id = params.id;
-      this.getVideoGame(id);
+      this.idGame = params.id;
+      this.getVideoGame(this.idGame);
     })
   }
 

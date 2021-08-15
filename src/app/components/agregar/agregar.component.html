@@ -34,7 +34,7 @@
                         class="input-text" 
                         name="console"
                         formControlName="console"
-                        
+                        [compareWith]="compare"
                     >
                         <option [ngValue]="consola" *ngFor="let consola of consolas">{{consola.name}}</option>
                         
@@ -47,6 +47,7 @@
                         class="input-text"
                         name="developer"
                         formControlName="developer"
+                        [compareWith]="compare"
                     >
                         <option [ngValue]="desarrollador" *ngFor="let desarrollador of desarrolladores">{{desarrollador.name}}</option>
                     </select>
