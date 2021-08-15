@@ -2,19 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-interface Common {
-  _id:String;
-  name:String;
-};
 
-interface ModelVideojuego {
-  developer:Common;
-  name:String;
-  description:String,
-  image:String,
-  year:String,
-  console: Array<Common>
-};
 
 @Component({
   selector: 'app-agregar',
@@ -23,8 +11,6 @@ interface ModelVideojuego {
 })
 
 export class AgregarComponent implements OnInit {
-
-  public modelVideojuego!:ModelVideojuego; 
 
   public consolas: any[] = new Array<any>();
   public desarrolladores: any[] = new Array<any>();
