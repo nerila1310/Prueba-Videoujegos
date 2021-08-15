@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PeticionesService } from 'src/app/services/peticiones.service';
 
 @Component({
   selector: 'app-detalle',
@@ -12,27 +13,17 @@ export class DetalleComponent implements OnInit {
   public console:any[] = [];
   public idGame:any;
   
-  constructor(private _route: ActivatedRoute) { }
+  constructor(private _route: ActivatedRoute, private _peticiones:PeticionesService) { }
 
   ngOnInit(): void {
+    // Obtenemos el id del path
     this._route.params.subscribe(params=>{
       this.idGame = params.id;
-      this.getVideoGame(this.idGame);
-    })
+    });
+
+    // Mandamos a traer todos los videojuegos
+    this._peticiones.getVideogame(this.idGame).subscribe(res => {
+      this.videojuego=res.videogame;
+    });
   }
-
-  getVideoGame = async (id:string) =>{
-
-    var url = `https://api-videogames.herokuapp.com/api/videogames/${id}`;
-    var auth ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmVyaWxhIiwiaWF0IjoxNjI4ODc4MTgxfQ.ZRz8E21Ek4-Ny0hXBx7Sq401ZZ8yuSAeL0D7wqAUJyA';
-  
-    const respuesta = await fetch(url, {
-                          method: 'GET',
-                          headers:{'Authorization':auth, 'Content-Type': 'application/json' }
-                      }
-                    );
-    const resultado = await respuesta.json();
-    this.videojuego=resultado.videogame;
-  }
-
 }

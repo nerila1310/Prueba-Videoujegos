@@ -13,12 +13,20 @@ export class PeticionesService {
   
   constructor(private http: HttpClient) { }
 
-  //Funcion para regresar los videojueo¿gos al componente listado
+  //Funcion para regresar los videojuegos al componente listado
   getVideogames():Observable<any>{
 
     const url = `${this.urlApi}/api/videogames/search`;
     var data = {"filters": {}, "pagination": {}};
     
     return this.http.post(url, JSON.stringify(data), {headers:this.headers } );
+  }
+
+  //Funcion para regresar la información de un videojuego para el componente detalle
+  getVideogame(id:string):Observable<any>{
+
+    const url = `${this.urlApi}/api/videogames/${id}`;
+    
+    return this.http.get(url, {headers:this.headers } );
   }
 }
