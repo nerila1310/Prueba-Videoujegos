@@ -1,3 +1,74 @@
-<div class="contenedor">
-    <h1>Agregar works!</h1>
+<div class="contenedor" >
+    <h2>Crear Videojuego</h2>
+
+    <form class="formulario" [formGroup]="games" (ngSubmit)="onSubmit()">
+        <fieldset>
+            <legend>Por favor requisita todos los datos</legend>
+
+            <div class="contenedor-campos">
+                <div class="campo">
+                    <label for="name">Nombre</label>
+                    <input 
+                        class="input-text" 
+                        type="text"
+                        name="name" 
+                        placeholder="Nombre del Videojuego"
+                        formControlName="name"
+                    >
+                </div>
+                
+                <div class="campo">
+                    <label for="year">Año</label>
+                    <input 
+                        class="input-text" 
+                        type="number"
+                        name="year" 
+                        placeholder="Año de lanzamiento"
+                        formControlName="year"
+                    >
+                </div>
+    
+                <div class="campo">
+                    <label for="console">Consola</label>
+                    <select 
+                        class="input-text" 
+                        name="console"
+                        formControlName="console"
+                        
+                    >
+                        <option [ngValue]="consola" *ngFor="let consola of consolas">{{consola.name}}</option>
+                        
+                    </select>
+                </div>
+    
+                <div class="campo">
+                    <label for="Developer">Desarrollador</label>
+                    <select 
+                        class="input-text"
+                        name="developer"
+                        formControlName="developer"
+                    >
+                        <option [ngValue]="desarrollador" *ngFor="let desarrollador of desarrolladores">{{desarrollador.name}}</option>
+                    </select>
+                </div>
+    
+                <div class="campo">
+                    <label for="description">Descripción</label>
+                    <textarea 
+                        class="input-text" 
+                        rows="7"
+                        name="description"
+                        placeholder="Describe el videojuego"
+                        formControlName="description"
+
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="posición">
+                <input class="boton" type="submit" [disabled]="games.invalid || submit" value="Guardar Videojuego">
+            </div>
+
+        </fieldset>
+    </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -32,8 +32,6 @@ export class DetalleComponent implements OnInit {
                     );
     const resultado = await respuesta.json();
     this.videojuego=resultado.videogame;
-    console.log(this.videojuego.developer.name);
-    
   }
 
 }

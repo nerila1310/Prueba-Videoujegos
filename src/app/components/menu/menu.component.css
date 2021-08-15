@@ -1,25 +1,22 @@
-
-/* Header */
-
 .header{
     background-color:#051937f8;
 }
 
 .barra{
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .logo h2{
-    font-family: 'Press Start 2P', cursive;
     color: yellow;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .navegacion a{
-    font-family: 'Montserrat Alternates', sans-serif;
     color: #e2e288;
+    font-family: 'Montserrat Alternates', sans-serif;
     font-size: 3rem;
     margin-right: 3rem;
 }
@@ -27,15 +24,13 @@
     color: white;
 }
 
-.actived{color: white;}
-
 .navegacion{
     display: flex;
     justify-content: space-between;
 }
 
 .entrada-link{
-    display: flex;
     align-items: center;
+    display: flex;
     margin-left: 0;
 }
