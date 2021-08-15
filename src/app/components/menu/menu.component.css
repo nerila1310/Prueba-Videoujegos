@@ -21,17 +21,14 @@
     font-family: 'Montserrat Alternates', sans-serif;
     color: #e2e288;
     font-size: 3rem;
-    margin-right: 4rem;
-    margin-left: 1rem;
+    margin-right: 3rem;
 }
 .navegacion a:hover{
     color: white;
 }
 
-.actived a{
-    
-    color: white;
-}
+.actived{color: white;}
+
 .navegacion{
     display: flex;
     justify-content: space-between;

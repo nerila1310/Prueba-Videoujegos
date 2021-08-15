@@ -1,0 +1,21 @@
+
+<div class="contenedor">
+    <h2>Detalle Videojuego</h2>
+
+    <div class="contenido-detalle">
+        <div class="image">
+            <img [src]="videojuego.image" [alt]="videojuego.name">
+        </div>
+
+        <div class="detalles">
+            <h1>{{videojuego.name}} ({{videojuego.year}})</h1>
+            <h3>Consola: {{videojuego.console[0].name}}</h3>
+            <h3>Desarrollador: {{videojuego.developer.name}}</h3>
+            <p>{{videojuego.description}}</p>
+            <div class="botonera">
+                <a routerLink="" class="button-edit">Editar</a>
+                <a routerLink="" class="button-delete">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>

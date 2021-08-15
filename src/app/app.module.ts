@@ -7,6 +7,7 @@ import { ListadoComponent } from './components/listado/listado.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { BuscarComponent } from './components/buscar/buscar.component';
 import { AgregarComponent } from './components/agregar/agregar.component';
+import { DetalleComponent } from './components/detalle/detalle.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AgregarComponent } from './components/agregar/agregar.component';
     ListadoComponent,
     MenuComponent,
     BuscarComponent,
-    AgregarComponent
+    AgregarComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,

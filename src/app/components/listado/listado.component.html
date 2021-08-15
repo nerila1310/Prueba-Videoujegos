@@ -1,3 +1,13 @@
 <div class="contenedor">
-    <h1>listado works!</h1>
+    <h2>Lista de VideoJuegos</h2>
+    <div class="contenido-flex">
+        <article *ngFor="let videojuego of videojuegos" class="entrada">
+            <img [src]="videojuego.image" [alt]="videojuego.name">
+            <div class="contenido">
+                <a routerLink="/detalle/{{videojuego._id}}"><h3>{{videojuego.name}}</h3></a>
+                <p>{{videojuego.year}}</p>
+            </div>
+        </article>
+    </div>
 </div>
+

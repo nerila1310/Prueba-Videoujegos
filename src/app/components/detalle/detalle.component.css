@@ -1,0 +1,65 @@
+h2{
+    width: 45%;
+    text-align: center;
+    border-radius: 1rem;
+    background-color: yellow;
+    color: black;
+    padding: 1rem 1rem;
+    margin-left:auto; margin-right:0;
+}
+.contenido-detalle{
+
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #041835;
+    border-radius: 2rem;
+    gap: 2rem;
+}
+
+.detalles h1,h3{
+    text-align: center;
+    color: #fffeeb;
+}
+
+img{
+    border-radius: 2rem;
+    width: 100%;
+    height: 70rem;
+}
+
+.image, .detalles{
+    flex: 1;
+}
+
+.detalles h1, p{
+    text-align: center;
+    color: #fffeeb;
+}
+
+.detalles p{
+    font-size: 2.5rem;
+}
+
+.botonera{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.botonera a{
+    padding: 2rem 3rem;
+    font-size: 2rem;
+    border-radius: 1rem;
+    margin-right: 2rem;
+}
+
+.button-edit{
+    background-color: #a7e586;
+    color:#174a02;
+}
+
+.button-delete{
+    background-color: #ff0000;
+    color: #FFFFFF;
+}
