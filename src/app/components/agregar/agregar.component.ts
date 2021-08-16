@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PeticionesService } from 'src/app/services/peticiones.service';
 
 
 
@@ -21,21 +22,32 @@ export class AgregarComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _peticiones:PeticionesService
   ) { }
 
   ngOnInit(): void {
     
     this.addForm();
-    this.getCatalogos();
-    this.getDevelopers();
 
+    // Mandamos a traer el catalogo de consolas
+    this._peticiones.getConsoles().subscribe(res => {
+      this.consolas = res.consoles;
+    });
+
+    // Mandamos a traer el catalogo de los desarrolladores
+    this._peticiones.getDevelopers().subscribe(res => {
+      this.desarrolladores = res.developers;
+    });
+
+    // Obtenemos el id del path
     this._route.params.subscribe(params=>{
       this.idGame = params.id;
-      this.getVideoGame(this.idGame);
+      if(this.idGame) this.setValues(this.idGame);
     })
   }
 
+  // creamos las validaciones para el formulario
   public addForm():void{
     this.games = this.formBuilder.group({
       developer:['', [Validators.required]],
@@ -46,24 +58,18 @@ export class AgregarComponent implements OnInit {
     });
   }
 
-  getVideoGame = async (id:string) =>{
+  // Mostramos los valores en el formulario en caso de que se desee editar
+  setValues = async (id:string) =>{
 
-    var url = `https://api-videogames.herokuapp.com/api/videogames/${id}`;
-    var auth ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmVyaWxhIiwiaWF0IjoxNjI4ODc4MTgxfQ.ZRz8E21Ek4-Ny0hXBx7Sq401ZZ8yuSAeL0D7wqAUJyA';
-  
-    const respuesta = await fetch(url, {
-                          method: 'GET',
-                          headers:{'Authorization':auth, 'Content-Type': 'application/json' }
-                      }
-                    );
-    const resultado = await respuesta.json();
-    
-    this.games.patchValue({
-      developer:resultado.videogame.developer,
-      name:resultado.videogame.name,
-      description: resultado.videogame.description,
-      year:resultado.videogame.year,
-      console:resultado.videogame.console[0]
+    // Mandamos a traer el videojuego para mostrar su detalle
+    this._peticiones.getVideogame(this.idGame).subscribe(res => {
+      this.games.patchValue({
+        developer:res.videogame.developer,
+        name:res.videogame.name,
+        description: res.videogame.description,
+        year:res.videogame.year,
+        console:res.videogame.console[0]
+      });
     });
   }
 
@@ -71,71 +77,27 @@ export class AgregarComponent implements OnInit {
     return v1._id === v2._id;
   }
 
-  getCatalogos = async () =>{
-
-    var url = 'https://api-videogames.herokuapp.com/api/consoles/catalog';
-    var auth ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmVyaWxhIiwiaWF0IjoxNjI4ODc4MTgxfQ.ZRz8E21Ek4-Ny0hXBx7Sq401ZZ8yuSAeL0D7wqAUJyA';
-  
-    const respuesta = await fetch(url, {
-                          method: 'GET',
-                          headers:{'Authorization':auth, 'Content-Type': 'application/json' }
-                      }
-                    );
-    const resultado = await respuesta.json();
-    this.consolas = resultado.consoles;
-  }
-
-  getDevelopers = async () =>{
-
-    var url = 'https://api-videogames.herokuapp.com/api/developer/catalog';
-    var auth ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmVyaWxhIiwiaWF0IjoxNjI4ODc4MTgxfQ.ZRz8E21Ek4-Ny0hXBx7Sq401ZZ8yuSAeL0D7wqAUJyA';
-  
-    const respuesta = await fetch(url, {
-                          method: 'GET',
-                          headers:{'Authorization':auth, 'Content-Type': 'application/json' }
-                      }
-                    );
-    const resultado = await respuesta.json();
-    this.desarrolladores = resultado.developers;
-  }
-
-  //getDevelopers();
   guardarProjects = async (data:any) =>{
-
     var url = 'https://api-videogames.herokuapp.com/api/videogames';
-    var metodo = 'POST'
+    var methodPost = true;
 
     if(this.idGame && this.idGame != null){
       url = 'https://api-videogames.herokuapp.com/api/videogames/'+this.idGame;
       data._id = this.idGame;
-      metodo = 'PUT'
+      methodPost = false;
     }
 
-    var auth ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmVyaWxhIiwiaWF0IjoxNjI4ODc4MTgxfQ.ZRz8E21Ek4-Ny0hXBx7Sq401ZZ8yuSAeL0D7wqAUJyA';
-
-     const respuesta = await fetch(url, {
-                           method: metodo,
-                           body: JSON.stringify(data),
-                           headers:{'Authorization':auth, 'Content-Type': 'application/json' }
-                       }
-                     );
-    let resultado = await respuesta.json();
-    this.submit = false;
-    //resultado = JSON.parse(resultado);
-    console.log(resultado);
-    
-    if(resultado.success){
-      this.route.navigateByUrl('/listar');
-    }
+    // Creamos o editamos un nuevo videojuego
+    this._peticiones.saveVideogame(url, methodPost, data).subscribe(res => {
+      this.submit = false;
+      if(res.success){ this.route.navigateByUrl('/listar'); } 
+    });
   }
-
 
   onSubmit(){
     this.submit = true;
     let forma = JSON.parse(JSON.stringify(this.games.value));
     forma.console = [forma.console];
     this.guardarProjects(forma);
-    
   }
-
 }

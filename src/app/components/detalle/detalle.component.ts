@@ -21,7 +21,7 @@ export class DetalleComponent implements OnInit {
       this.idGame = params.id;
     });
 
-    // Mandamos a traer todos los videojuegos
+    // Mandamos a traer el videojuego para mostrar su detalle
     this._peticiones.getVideogame(this.idGame).subscribe(res => {
       this.videojuego=res.videogame;
     });
