@@ -18,6 +18,7 @@ export class AgregarComponent implements OnInit {
   public games!:FormGroup;
   public submit:boolean = false;
   public idGame!:any;
+  public title:string = 'Crear Videjuego'
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,7 +44,10 @@ export class AgregarComponent implements OnInit {
     // Obtenemos el id del path
     this._route.params.subscribe(params=>{
       this.idGame = params.id;
-      if(this.idGame) this.setValues(this.idGame);
+      if(this.idGame) {
+        this.setValues(this.idGame)
+        this.title = "Editar Videojuego";
+      };
     })
   }
 
@@ -94,7 +98,7 @@ export class AgregarComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  submitVideojuego(){
     this.submit = true;
     let forma = JSON.parse(JSON.stringify(this.games.value));
     forma.console = [forma.console];

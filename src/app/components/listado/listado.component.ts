@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Observable } from 'rxjs';
 import { PeticionesService } from 'src/app/services/peticiones.service';
 
 @Component({
@@ -9,14 +10,28 @@ import { PeticionesService } from 'src/app/services/peticiones.service';
 export class ListadoComponent implements OnInit {
 
   public videojuegos: any[] = new Array<any>();
+  @Input() filter!:any;
 
-  constructor(private _peticiones:PeticionesService) { }
+  constructor(private _peticiones:PeticionesService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    
+    this.listarVideogames(null);
+  }
+
+  listarVideogames(filter:any){
     // Mandamos a traer todos los videojuegos
-    this._peticiones.getVideogames().subscribe(res => {
+    this._peticiones.getVideogames(filter).subscribe(res => {
+      console.log(res.videogames);
+      
       this.videojuegos = res.videogames;
-    });
+    });    
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    console.log('changes');
+    console.log(this.filter);
+    
+    this.listarVideogames(this.filter);
+
   }
 }

@@ -1,7 +1,7 @@
 <div class="contenedor" >
-    <h2>Crear Videojuego</h2>
+    <h2>{{title}}</h2>
 
-    <form class="formulario" [formGroup]="games" (ngSubmit)="onSubmit()">
+    <form class="formulario" [formGroup]="games">
         <fieldset>
             <legend>Por favor requisita todos los datos</legend>
 
@@ -67,9 +67,9 @@
             </div>
 
             <div class="posición">
-                <input class="boton" type="submit" [disabled]="games.invalid || submit" value="Guardar Videojuego">
+                <button [disabled]="games.invalid" class="boton"  (click)="submitVideojuego()"> Guardar Videojuego </button>
+                
             </div>
-
         </fieldset>
     </form>
 </div>

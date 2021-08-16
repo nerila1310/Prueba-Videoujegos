@@ -81,3 +81,8 @@ h2{
     display: flex;
     justify-content: flex-end;
 }
+
+.boton:disabled{
+    background-color: #7f9771;
+    cursor: not-allowed;
+}

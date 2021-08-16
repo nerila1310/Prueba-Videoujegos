@@ -1,3 +1,69 @@
-<div class="contenedor">
-    <h1>Buscar works!</h1>
+<div class="contenedor" >
+    <h2>Buscar Videojuego</h2>
+
+    <form class="formulario">
+        <fieldset>
+            <legend>Define los parámetros para la busqueda</legend>
+
+            <div class="contenedor-campos">
+                <div class="campo">
+                    <label for="name">Nombre</label>
+                    <input 
+                        class="input-text" 
+                        type="text"
+                        name="name" 
+                        placeholder="Nombre del Videojuego"
+                        [(ngModel)]="busqueda.name"
+                    >
+                </div>
+                
+                <div class="campo">
+                    <label for="year">Año</label>
+                    <input 
+                        class="input-text" 
+                        type="number"
+                        name="year" 
+                        placeholder="Año de lanzamiento"
+                        [(ngModel)]="busqueda.year"
+                    >
+                </div>
+    
+                <div class="campo">
+                    <label for="console">Consola</label>
+                    <select 
+                        class="input-text" 
+                        name="console"
+                        [(ngModel)]="busqueda.console"
+                    >
+                        <option value=""></option>
+                        <option [ngValue]="consola" *ngFor="let consola of consolas">{{consola.name}}</option>
+                    </select>
+                </div>
+    
+                <div class="campo">
+                    <label for="Developer">Desarrollador</label>
+                    <select 
+                        class="input-text"
+                        name="developer"
+                        [(ngModel)]="busqueda.desarrollador"
+                    >
+                        <option value=""></option>
+                        <option [ngValue]="desarrollador" *ngFor="let desarrollador of desarrolladores">{{desarrollador.name}}</option>
+                    </select>
+                </div>  
+            </div>
+
+            <div class="posición">
+                <button class="boton" (click)="submitVideojuego()"> Buscar Videojuego </button>
+                
+            </div>
+        </fieldset>
+    </form>
+
+   
+    
+</div>
+
+<div>
+    <app-listado class="margin-cero" [filter]="filtrado"></app-listado>
 </div>

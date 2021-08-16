@@ -14,9 +14,13 @@ export class PeticionesService {
   constructor(private http: HttpClient) { }
 
   //Funcion para regresar los videojuegos al componente listado
-  getVideogames():Observable<any>{
+  getVideogames(filter:any):Observable<any>{
+   
     const url = `${this.urlApi}/api/videogames/search`;
-    var data = {"filters": {}, "pagination": {}};
+    var data = filter && filter != null ? filter : {"filters": {}, "pagination": {}};
+    
+    console.log('buscando', data);
+
     return this.http.post(url, JSON.stringify(data), {headers:this.headers } );
   }
 
