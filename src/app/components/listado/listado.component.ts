@@ -21,17 +21,11 @@ export class ListadoComponent implements OnInit {
   listarVideogames(filter:any){
     // Mandamos a traer todos los videojuegos
     this._peticiones.getVideogames(filter).subscribe(res => {
-      console.log(res.videogames);
-      
       this.videojuegos = res.videogames;
     });    
   }
 
   ngOnChanges(changes: SimpleChanges){
-    console.log('changes');
-    console.log(this.filter);
-    
     this.listarVideogames(this.filter);
-
   }
 }

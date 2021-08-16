@@ -69,8 +69,6 @@ export class BuscarComponent implements OnInit {
       params.filters.desarrollador = this.busqueda.desarrollador.name;
     }
 
-    this.filtrado = params;
-    console.log(this.filtrado);
-    
+    this.filtrado = params; 
   }
 }
